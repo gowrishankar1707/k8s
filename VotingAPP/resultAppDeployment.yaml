@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resultappdeployment
+  labels:
+    name: resultappdeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resultapppod
+      
+  template:
+    metadata:
+      name: resultapppod
+      labels:
+        app: resultapppod
+    spec:
+      containers:
+        - name: resultapp
+          image: kodekloud/examplevotingapp_result:v1
+          ports:
+            - containerPort: 80  # port in which the containers located in pod will listens
+                                 #  containerPort should be equal to Service targetPort

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "gs"
+  labels:
+    tier: "gs"
+spec:
+  containers:
+    - name: "gs"
+      image: "nginx"

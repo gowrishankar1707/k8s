@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redisdeployment
+  labels:
+    name: redisdeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redispod
+      
+  template:
+    metadata:
+      name: redispod
+      labels:
+        app: redispod
+    spec:
+      containers:
+        - name: redisapp
+          image: redis
+          ports:
+            - containerPort: 6379  # port in which the containers located in pod will listens
+                                 #  containerPort should be equal to Service targetPort

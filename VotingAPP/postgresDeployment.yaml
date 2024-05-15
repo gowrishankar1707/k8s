@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresdeployment
+  labels:
+    name: postgresdeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgrespod
+      
+  template:
+    metadata:
+      name: postgrespod
+      labels:
+        app: postgrespod
+    spec:
+      containers:
+        - name: postgresapp
+          image: postgres:9.4
+          ports:
+            - containerPort: 5432  # port in which the containers located in pod will listens
+                                 #  containerPort should be equal to Service targetPort
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: trust
